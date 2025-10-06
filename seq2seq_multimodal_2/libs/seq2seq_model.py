@@ -1,6 +1,7 @@
 import tensorflow as tf
 import numpy as np
 from tensorflow.keras.preprocessing.sequence import pad_sequences
+from tensorflow.keras.layers import Lambda
 
 from tensorflow.keras.layers import Dense, Input, Add, Multiply, Dropout, Activation, LSTM
 
@@ -38,7 +39,8 @@ class Sequence2Sequence():
         decoder_input = Input((self.decoder_steps, 1)) # [None, 10, 1]
         
         paddings = tf.constant([[0, 0], [1, 0], [0, 0]]) # pad 1 column BEFORE the 2nd dimension
-        decoder_input_padded = tf.pad( decoder_input, paddings, 'CONSTANT') # [None, 11, 1]
+        # decoder_input_padded = tf.pad( decoder_input, paddings, 'CONSTANT') # [None, 11, 1]
+        decoder_input_padded = Lambda(lambda x: tf.pad(x, [[0,0],[1,0],[0,0]], "CONSTANT"))(decoder_input)
         
         input_embedding = Dense(self.hidden_layer_size)
         encoder_input_embed = input_embedding (encoder_input) # [None, 20, 5]
@@ -68,7 +70,9 @@ class Sequence2Sequence():
         decoder_state_input_c = Input(shape=(self.hidden_layer_size,))
         decoder_states_inputs = [decoder_state_input_h, decoder_state_input_c]
         decoder_input_single = Input(shape=(1,))
-        decoder_input_single_embedded = output_embedding(tf.expand_dims(decoder_input_single, axis=-1))
+        expanded_single = Lambda(lambda x: tf.expand_dims(x,axis=-1))(decoder_input_single)
+        decoder_input_single_embedded = output_embedding(expanded_single)
+        # decoder_input_single_embedded = output_embedding(tf.expand_dims(decoder_input_single, axis=-1))
         decoder_outputs, h, c = decoder(decoder_input_single_embedded, initial_state=decoder_states_inputs)
         decoder_states = [h,c]        
         prediction  = decoder_dense(decoder_outputs)

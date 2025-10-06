@@ -54,7 +54,8 @@ def batch_data(data, val_columns):
 experiments = ['rest', 'normal', 'abnormal']
 all_experiments_losses = []
 for experiment_name in experiments:
-    data_folder = os.path.join('/uio/kant/ifi-ansatt-u04/hoangmph/hoangminh/data/mecs', experiment_name)
+    # data_folder = os.path.join('/uio/kant/ifi-ansatt-u04/hoangmph/hoangminh/data/mecs', experiment_name)
+    data_folder = os.path.join('../data/mecs', experiment_name)
     print('Start experiment ' + experiment_name)
     all_losses = {}
     for q in [0.1, 0.5, 0.9]:
