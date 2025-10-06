@@ -1,0 +1,21 @@
+experiment: normal
+data_folder: data/mecs/normal
+csv_folder: data/result
+data_csv: uwb_hr_normal.csv 
+
+total_time_steps: 30 # 20 histoty + 10 forecast
+num_encoder_steps: 20
+chosen_columns: 300
+train_boundary: 15
+
+num_epochs: 120
+early_stopping_patience: 5
+learning_rate: 0.001
+minibatch_size: 64
+
+model: tft
+hidden_layer_size: 256
+dropout_rate: 0.15
+num_heads: 4
+stack_size: 1
+max_gradient_norm: 0.01

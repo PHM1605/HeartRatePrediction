@@ -42,7 +42,7 @@ def download_function(config):
 
 def main():
     print('### Running download script ###')
-    expt_config = ExperimentConfig(experiment='normal')
+    expt_config = ExperimentConfig(experiment='rest')
     download_function(expt_config)
     print('Download completed')
 

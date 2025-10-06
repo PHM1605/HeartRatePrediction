@@ -4,7 +4,7 @@ import data_formatters.heart_rate
 class ExperimentConfig():
     def __init__(self, experiment):
         self.experiment = experiment
-        self.data_folder = os.path.join('/uio/kant/ifi-ansatt-u04/hoangmph/hoangminh/data/mecs', self.experiment)
+        self.data_folder = os.path.join('/media/phm1605/hddstorage1/data/mecs', self.experiment)
         
     @property
     def data_csv_path(self):
