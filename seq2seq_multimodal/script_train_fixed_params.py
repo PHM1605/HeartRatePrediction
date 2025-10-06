@@ -58,7 +58,7 @@ def batch_data(data, val_columns):
 experiments = ['abnormal']
 all_experiments_losses = []
 for experiment_name in experiments:
-    data_folder = os.path.join('/uio/kant/ifi-ansatt-u04/hoangmph/hoangminh/data/mecs', experiment_name)
+    data_folder = os.path.join('../data/mecs', experiment_name)
     all_losses = []
     for col in range(0,300,10):
         chosen_columns = ['xt{}'.format(i) for i in range(col,col+10)]
